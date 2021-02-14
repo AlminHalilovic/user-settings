@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: user-settings
+  cloud:
+    config:
+      uri: http://user-config-server:8080
