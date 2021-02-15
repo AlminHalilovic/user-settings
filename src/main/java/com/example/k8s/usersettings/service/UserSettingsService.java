@@ -18,7 +18,7 @@ public class UserSettingsService {
         return userSettingsDatabaseService.getAccounts();
     }
 
-    public void updateAccountSettingsOrder(String accountId, AccountUpdate accountUpdate){
-        userSettingsDatabaseService.updateAccountSettingsOrder(accountId, accountUpdate);
+    public void patchAccountSettings(String accountId, AccountUpdate accountUpdate) {
+        userSettingsDatabaseService.patchAccountSettings(accountId, accountUpdate);
     }
 }

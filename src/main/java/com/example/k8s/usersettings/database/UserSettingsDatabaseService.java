@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.k8s.usersettings.database.dao.IUserSettingsDAO;
-import com.example.k8s.usersettings.database.model.DBAccountOrderSettings;
+import com.example.k8s.usersettings.database.model.DbAccountSettings;
 import com.example.k8s.usersettings.domain.Account;
 import com.example.k8s.usersettings.domain.AccountUpdate;
 import com.example.k8s.usersettings.exception.AccountNotFoundException;
@@ -21,14 +21,26 @@ public class UserSettingsDatabaseService {
     private com.example.k8s.usersettings.database.AccountMapper accountMapper;
 
     public List<Account> getAccounts() {
-        List<DBAccountOrderSettings> dbAccountOrderSettingsList = userSettingsDAO.findAll();
-        return accountMapper.toAccounts(dbAccountOrderSettingsList);
+        List<DbAccountSettings> dbAccountSettingsList = userSettingsDAO.findAll();
+        return accountMapper.toAccounts(dbAccountSettingsList);
     }
 
-    public void updateAccountSettingsOrder(String accountId, AccountUpdate accountUpdate) {
-        Optional<DBAccountOrderSettings> dbAccountOrderSettingsOptional = userSettingsDAO.findById(accountId);
+    public void patchAccountSettings(String accountId, AccountUpdate accountUpdate) {
+
+        Optional<DbAccountSettings> dbAccountOrderSettingsOptional = userSettingsDAO.findById(accountId);
+
         if (dbAccountOrderSettingsOptional.isPresent()) {
-            dbAccountOrderSettingsOptional.get().setAccountOrder(accountUpdate.getNewOrder());
+
+            DbAccountSettings dbAccountSettings = dbAccountOrderSettingsOptional.get();
+
+            if (accountUpdate.getNewName() != null) {
+                dbAccountSettings.setAccountName(accountUpdate.getNewName());
+            }
+
+            if (accountUpdate.getNewOrder() != null) {
+                dbAccountSettings.setAccountOrder(accountUpdate.getNewOrder());
+            }
+
             userSettingsDAO.save(dbAccountOrderSettingsOptional.get());
         } else {
             throw new AccountNotFoundException();

@@ -6,8 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-@Table(name = "ACCOUNT_ORDER_SETTINGS", schema = "user_settings")
-public class DBAccountOrderSettings {
+@Table(name = "ACCOUNT_SETTINGS", schema = "user_settings")
+public class DbAccountSettings {
 
     @Id
     @Column(name = "ID")
