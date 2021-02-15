@@ -15,17 +15,17 @@ public class UserSettingsController {
     @Autowired
     private UserSettingsService userSettingsService;
 
-    @GetMapping("/settings/account-order")
+    @GetMapping("/settings/account-settings")
     public ResponseEntity<List<Account>> getAccounts() {
 
         return ResponseEntity.ok(userSettingsService.getAccounts());
     }
 
 
-    @PutMapping("/settings/{accountId}/account-order")
-    public ResponseEntity<Void> updateAccountOrder(@PathVariable("accountId") String accountId,
-                                                   @RequestBody AccountUpdate accountUpdate) {
-        userSettingsService.updateAccountSettingsOrder(accountId, accountUpdate);
+    @PatchMapping("/settings/{accountId}/account-settings")
+    public ResponseEntity<Void> patchAccountSettings(@PathVariable("accountId") String accountId,
+                                                     @RequestBody AccountUpdate accountUpdate) {
+        userSettingsService.patchAccountSettings(accountId, accountUpdate);
 
         return ResponseEntity.accepted().build();
     }
