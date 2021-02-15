@@ -7,4 +7,4 @@ Configuration for *database* or *server:port* microservice url during local run 
 
 ## Building docker image
 You can build docker image by running following command inside the directory where `Dockerfile` is located.
-- `docker build --build-arg JAR_FILE=build/libs/\*.jar -t account-fetching:0.0.1 .`
+- `docker build --build-arg JAR_FILE=build/libs/\*.jar -t user-settings:0.0.1 .`
